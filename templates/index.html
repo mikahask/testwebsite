@@ -7,11 +7,16 @@
 </head>
 <body>
     <h1>Upload a PDF</h1>
-    <input type="file" id="pdfInput" accept=".pdf">
-    <button onclick="uploadPDF()">Upload PDF</button>
+    <form id="pdfForm" enctype="multipart/form-data">
+        <input type="file" id="pdfInput" accept=".pdf">
+        <button type="button" onclick="uploadPDF()">Upload PDF</button>
+    </form>
     <div id="result"></div>
+    <button onclick="displayExtractedText()">Display Extracted Text</button>
     
     <script>
+        var extractedText = ''; // Global variable to store extracted text
+
         function uploadPDF() {
             var input = document.getElementById('pdfInput');
             var file = input.files[0];
@@ -29,7 +34,8 @@
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     var result = JSON.parse(xhr.responseText);
-                    displayText(result.text);
+                    extractedText = result.text; // Store extracted text in global variable
+                    displayText(extractedText); // Display text in 'result' div
                 } else {
                     alert('Error uploading PDF.');
                 }
@@ -40,6 +46,14 @@
         function displayText(text) {
             var resultDiv = document.getElementById('result');
             resultDiv.innerText = text; // Display extracted text in the 'result' div
+        }
+
+        function displayExtractedText() {
+            if (extractedText) {
+                alert('Extracted Text:\n' + extractedText); // Display extracted text in an alert
+            } else {
+                alert('No text extracted yet.');
+            }
         }
     </script>
 </body>

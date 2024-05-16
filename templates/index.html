@@ -7,10 +7,12 @@
 </head>
 <body>
     <h1>Upload a PDF</h1>
-    <input type="file" id="pdfInput" accept=".pdf">
-    <button onclick="uploadPDF()">Upload PDF</button>
+    <form id="pdfForm" enctype="multipart/form-data">
+        <input type="file" id="pdfInput" accept=".pdf">
+        <button type="button" onclick="uploadPDF()">Upload PDF</button>
+    </form>
     <div id="result"></div>
-    <button onclick="displayExtractedText()">Display Extracted Text</button> <!-- New button -->
+    <button onclick="displayExtractedText()">Display Extracted Text</button>
     
     <script>
         var extractedText = ''; // Global variable to store extracted text

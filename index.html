@@ -21,17 +21,15 @@
                 return;
             }
 
-            // Create a FormData object
             var formData = new FormData();
             formData.append('pdfFile', file);
 
-            // Make an AJAX request to upload the file
             var xhr = new XMLHttpRequest();
             xhr.open('POST', '/upload-pdf', true);
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     var result = JSON.parse(xhr.responseText);
-                    displayText(result.text); // Call function to display text
+                    displayText(result.text);
                 } else {
                     alert('Error uploading PDF.');
                 }
@@ -40,17 +38,8 @@
         }
 
         function displayText(text) {
-            // Clear previous result
             var resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = '';
-
-            // Split text into words and create span elements for each word
-            var words = text.split(' ');
-            words.forEach(function(word) {
-                var span = document.createElement('span');
-                span.textContent = word + ' ';
-                resultDiv.appendChild(span);
-            });
+            resultDiv.innerText = text; // Display extracted text in the 'result' div
         }
     </script>
 </body>
